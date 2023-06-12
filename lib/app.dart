@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:presentation/screen/main_screen.dart';
+import 'package:presentation/service/navigation/navigation_service.dart';
+import 'package:presentation/service/navigation/routes.dart';
 import 'package:task_management/dependency_builder.dart';
-import 'package:task_management/screen/main_screen.dart';
-import 'package:task_management/service/navigation/navigation_service.dart';
-import 'package:task_management/service/navigation/routes.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

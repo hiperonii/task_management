@@ -8,7 +8,7 @@ part of 'task_response.dart';
 
 TaskResponse _$TaskResponseFromJson(Map<String, dynamic> json) => TaskResponse(
       (json['tasks'] as List<dynamic>)
-          .map((e) => Task.fromJson(e as Map<String, dynamic>))
+          .map((e) => TaskDto.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['pageNumber'] as int,
       json['totalPages'] as int,

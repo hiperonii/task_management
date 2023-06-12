@@ -1,4 +1,4 @@
-import 'package:data/task_api_service.dart';
+import 'package:data/api_service/task_api_service.dart';
 import 'package:dio/dio.dart';
 
 class ApiServiceProvider {

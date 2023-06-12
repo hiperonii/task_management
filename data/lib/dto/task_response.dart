@@ -1,4 +1,4 @@
-import 'package:data/dto/task.dart';
+import 'package:data/dto/task_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'task_response.g.dart';
@@ -10,7 +10,7 @@ class TaskResponse {
   factory TaskResponse.fromJson(Map<String, dynamic> json) => _$TaskResponseFromJson(json);
 
   @JsonKey(name: 'tasks')
-  final List<Task> tasks;
+  final List<TaskDto> tasks;
 
   @JsonKey(name: 'pageNumber')
   final int pageNumber;
