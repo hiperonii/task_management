@@ -36,24 +36,22 @@ class _TaskListScreenState extends State<TaskListScreen> with AutomaticKeepAlive
           return Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              Expanded(
-                child: StreamBuilder<List<TaskItem>>(
-                    stream: _viewModel.taskItemsStream,
-                    builder: (_, snapshot) {
-                      final tasks = snapshot.data ?? [];
-                      return NotificationListener<ScrollNotification>(
-                        onNotification: _onNotification,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.fromLTRB(24, 12, 24, 60),
-                          itemCount: tasks.length,
-                          itemBuilder: (_, index) {
-                            return _buildItem(tasks[index]);
-                          },
-                        ),
-                      );
-                    }),
-              ),
+              StreamBuilder<List<TaskItem>>(
+                  stream: _viewModel.taskItemsStream,
+                  builder: (_, snapshot) {
+                    final tasks = snapshot.data ?? [];
+                    return NotificationListener<ScrollNotification>(
+                      onNotification: _onNotification,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.fromLTRB(24, 12, 24, 60),
+                        itemCount: tasks.length,
+                        itemBuilder: (_, index) {
+                          return _buildItem(tasks[index]);
+                        },
+                      ),
+                    );
+                  }),
               if (isLoading)
                 Container(
                   width: 36,
@@ -81,7 +79,7 @@ class _TaskListScreenState extends State<TaskListScreen> with AutomaticKeepAlive
     } else if (item is ContentTaskItem) {
       return ContentItemWidget(
         item,
-        key: Key(item.id),
+        key: ValueKey(item.id),
         onDelete: () => _viewModel.onDeleteTask(item.id),
       );
     } else {

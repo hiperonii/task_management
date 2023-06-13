@@ -96,7 +96,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
         labelStyle: const TextStyle(fontWeight: FontWeight.bold),
         unselectedLabelStyle: TextStyle(color: Colors.brown.shade50),
         controller: _tabController,
-        tabs: _taskTabs.map((t) => Tab(text: t.title)).toList(),
+        tabs: _taskTabs.map((t) => Tab(key: ValueKey(t.title) ,text: t.title)).toList(),
       ),
     );
   }
