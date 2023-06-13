@@ -47,11 +47,17 @@ class TaskListViewModel {
     dateToTasks.forEach((date, tasks) {
       items.add(HeaderTaskItem(date));
       for (var task in tasks) {
-        items.add(ContentTaskItem(task.title, task.description));
+        items.add(ContentTaskItem(task.title, task.id, task.description));
       }
     });
 
     return items;
+  }
+
+  void onDeleteTask(String id) {
+    final tasks = tasksSubject.value;
+    tasks.removeWhere((t) => t.id == id);
+    tasksSubject.add(tasks);
   }
 
   void dispose() {

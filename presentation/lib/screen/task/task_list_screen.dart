@@ -79,7 +79,11 @@ class _TaskListScreenState extends State<TaskListScreen> with AutomaticKeepAlive
     if (item is HeaderTaskItem) {
       return HeaderItemWidget(item);
     } else if (item is ContentTaskItem) {
-      return ContentItemWidget(item);
+      return ContentItemWidget(
+        item,
+        key: Key(item.id),
+        onDelete: () => _viewModel.onDeleteTask(item.id),
+      );
     } else {
       return const SizedBox.shrink();
     }

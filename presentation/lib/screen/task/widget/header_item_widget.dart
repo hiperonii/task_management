@@ -9,8 +9,8 @@ class HeaderItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 12),
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+      margin: const EdgeInsets.only(top: 12),
       decoration: BoxDecoration(
         border: Border(left: BorderSide(color: Colors.purple.shade50, width: 4)),
       ),

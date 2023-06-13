@@ -9,7 +9,8 @@ class HeaderTaskItem extends TaskItem {
 }
 
 class ContentTaskItem extends TaskItem {
-  const ContentTaskItem(super.title, this.description);
+  const ContentTaskItem(super.title, this.id, this.description);
 
+  final String id;
   final String description;
 }
