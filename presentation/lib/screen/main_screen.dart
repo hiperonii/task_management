@@ -22,31 +22,29 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: _buildBody(),
+      body: SafeArea(child: _buildBody()),
     );
   }
 
   Widget _buildBody() {
-    return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              _buildHeader(),
-              Positioned(
-                bottom: -12,
-                left: 0,
-                right: 0,
-                child: _buildTabBar(),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Expanded(child: _buildTabBarView()),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Stack(
+          clipBehavior: Clip.none,
+          children: [
+            _buildHeader(),
+            Positioned(
+              bottom: -12,
+              left: 0,
+              right: 0,
+              child: _buildTabBar(),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Expanded(child: _buildTabBarView()),
+      ],
     );
   }
 

@@ -4,6 +4,14 @@ import 'package:flutter/widgets.dart';
 import 'package:presentation/service/navigation/routes.dart';
 
 class NavigationService {
+  NavigationService._();
+
+  static NavigationService? instance;
+
+  factory NavigationService() {
+    return instance ??= NavigationService._();
+  }
+
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   Future<T?> navigateTo<T extends Object?, V extends Object?>(Routes route, {V? arguments}) {
