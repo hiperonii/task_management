@@ -29,19 +29,40 @@ class _TaskListScreenState extends State<TaskListScreen> with AutomaticKeepAlive
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return StreamBuilder<List<TaskItem>>(
-        stream: _viewModel.taskItemsStream,
+    return StreamBuilder<bool>(
+        stream: _viewModel.isLoadingSubject,
         builder: (_, snapshot) {
-          final tasks = snapshot.data ?? [];
-          return NotificationListener<ScrollNotification>(
-            onNotification: _onNotification,
-            child: ListView.builder(
-              padding: const EdgeInsets.fromLTRB(24, 12, 24, 60),
-              itemCount: tasks.length,
-              itemBuilder: (_, index) {
-                return _buildItem(tasks[index]);
-              },
-            ),
+          final isLoading = snapshot.data ?? false;
+          return Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              Expanded(
+                child: StreamBuilder<List<TaskItem>>(
+                    stream: _viewModel.taskItemsStream,
+                    builder: (_, snapshot) {
+                      final tasks = snapshot.data ?? [];
+                      return NotificationListener<ScrollNotification>(
+                        onNotification: _onNotification,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.fromLTRB(24, 12, 24, 60),
+                          itemCount: tasks.length,
+                          itemBuilder: (_, index) {
+                            return _buildItem(tasks[index]);
+                          },
+                        ),
+                      );
+                    }),
+              ),
+              if (isLoading)
+                Container(
+                  width: 36,
+                  height: 36,
+                  margin: const EdgeInsets.only(bottom: 24),
+                  alignment: Alignment.center,
+                  child: const CircularProgressIndicator(),
+                ),
+            ],
           );
         });
   }

@@ -13,7 +13,3 @@ class ContentTaskItem extends TaskItem {
 
   final String description;
 }
-
-class LoadingTaskItem extends TaskItem {
-  const LoadingTaskItem() : super('Loading');
-}
