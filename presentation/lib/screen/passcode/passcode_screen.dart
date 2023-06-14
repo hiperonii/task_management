@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:presentation/screen/passcode/passcode_view_model.dart';
 import 'package:presentation/screen/passcode/widgets/pin_code_field.dart';
 import 'package:presentation/screen/passcode/widgets/virtual_keyboard.dart';
+import 'package:presentation/service/passcode/passcode_service.dart';
 
 class PasscodeScreen extends StatefulWidget {
   const PasscodeScreen({Key? key}) : super(key: key);
@@ -12,6 +13,12 @@ class PasscodeScreen extends StatefulWidget {
 
 class _PasscodeScreenState extends State<PasscodeScreen> {
   late final PasscodeViewModel _viewModel = PasscodeViewModel();
+
+  @override
+  void initState() {
+    super.initState();
+    PasscodeService().stop();
+  }
 
   @override
   Widget build(BuildContext context) {

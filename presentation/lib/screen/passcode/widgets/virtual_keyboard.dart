@@ -42,6 +42,9 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
   Widget _buildKey(KeySymbols key) {
     return InkWell(
       key: ValueKey('$key'),
+      customBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
+      ),
       onTap: () => widget.onTap?.call(key),
       child: Container(
         padding: const EdgeInsets.all(16),

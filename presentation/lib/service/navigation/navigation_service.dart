@@ -6,11 +6,11 @@ import 'package:presentation/service/navigation/routes.dart';
 class NavigationService {
   NavigationService._();
 
-  static NavigationService? instance;
-
   factory NavigationService() {
-    return instance ??= NavigationService._();
+    return _instance ??= NavigationService._();
   }
+
+  static NavigationService? _instance;
 
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -21,6 +21,16 @@ class NavigationService {
       return Future.value(null);
     }
 
-    return state.pushNamed(route.name, arguments: arguments);
+    return state.pushNamed<T>(route.name, arguments: arguments);
+  }
+
+  Future<T?> replaceEntireStack<T extends Object?>(Routes route) {
+    final state = navigatorKey.currentState;
+    if (state == null) {
+      log('currentState is null');
+      return Future.value(null);
+    }
+
+    return state.pushNamedAndRemoveUntil<T>(route.name, (_) => false);
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:presentation/screen/passcode/passcode_screen.dart';
 import 'package:presentation/service/navigation/navigation_service.dart';
 import 'package:presentation/service/navigation/routes.dart';
+import 'package:presentation/service/passcode/passcode_service.dart';
 import 'package:task_management/dependency_builder.dart';
 
 class App extends StatelessWidget {
@@ -17,7 +18,10 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const PasscodeScreen(),
+      home: Listener(
+        onPointerDown: (_) => locator.get<PasscodeService>().reset(),
+        child: const PasscodeScreen(),
+      ),
     );
   }
 }

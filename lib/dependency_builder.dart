@@ -6,6 +6,7 @@ import 'package:domain/domain.dart';
 import 'package:get_it/get_it.dart';
 import 'package:presentation/repository_provider.dart';
 import 'package:presentation/service/navigation/navigation_service.dart';
+import 'package:presentation/service/passcode/passcode_service.dart';
 import 'package:task_management/repository_provider_impl.dart';
 
 final GetIt locator = GetIt.instance;
@@ -14,6 +15,7 @@ class DependencyBuilder {
   void build() {
     // Build Service
     locator.registerLazySingleton<NavigationService>(() => NavigationService());
+    locator.registerLazySingleton<PasscodeService>(() => PasscodeService());
 
     // Build ApiService
     final apiServiceProvider = ApiServiceProvider();

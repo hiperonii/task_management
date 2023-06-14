@@ -1,10 +1,12 @@
 import 'package:presentation/screen/passcode/widgets/key_symbols.dart';
 import 'package:presentation/service/navigation/navigation_service.dart';
 import 'package:presentation/service/navigation/routes.dart';
+import 'package:presentation/service/passcode/passcode_service.dart';
 import 'package:rxdart/rxdart.dart';
 
 class PasscodeViewModel {
   static const _passCodeLength = 6;
+  static const _correctPasscode = '123456';
 
   late final BehaviorSubject<String> passcodeSubject = BehaviorSubject.seeded('');
 
@@ -23,7 +25,8 @@ class PasscodeViewModel {
   }
 
   void onComplete() {
-    if (_code == '123456') {
+    if (_code == _correctPasscode) {
+      PasscodeService().start();
       NavigationService().navigateTo(Routes.main);
     } else {
       passcodeSubject.addError(ArgumentError());
