@@ -13,4 +13,9 @@ class KeySymbols {
   static KeySymbols seven = KeySymbols._('7');
   static KeySymbols eight = KeySymbols._('8');
   static KeySymbols nine = KeySymbols._('9');
+
+  @override
+  String toString() {
+    return 'Key_$value';
+  }
 }

@@ -32,7 +32,7 @@ class _PasscodeScreenState extends State<PasscodeScreen> {
         children: [
           _buildPinCodeField(),
           const SizedBox(height: 60),
-          VirtualKeyboard(onTap: _viewModel.onKeyTap),
+          VirtualKeyboard(key: const ValueKey('Keyboard'),onTap: _viewModel.onKeyTap),
         ],
       ),
     );
