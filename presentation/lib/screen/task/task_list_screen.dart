@@ -36,14 +36,14 @@ class _TaskListScreenState extends State<TaskListScreen> with AutomaticKeepAlive
           return Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              _buildTaskList(),
-              if (isLoading) const Loading(margin: EdgeInsets.only(bottom: 24)),
+              _buildContent(),
+              if (isLoading) _buildBottomLoading(),
             ],
           );
         });
   }
 
-  Widget _buildTaskList() {
+  Widget _buildContent() {
     return StreamBuilder<List<TaskItem>>(
         stream: _viewModel.taskItemsStream,
         builder: (_, snapshot) {
@@ -58,6 +58,10 @@ class _TaskListScreenState extends State<TaskListScreen> with AutomaticKeepAlive
             onDeleteItem: _viewModel.onDeleteTask,
           );
         });
+  }
+
+  Loading _buildBottomLoading() {
+    return const Loading(margin: EdgeInsets.only(bottom: 24));
   }
 
   @override
