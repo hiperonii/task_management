@@ -1,9 +1,9 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:presentation/common/widgets/loading.dart';
 import 'package:presentation/screen/task/model/task_item.dart';
 import 'package:presentation/screen/task/task_list_view_model.dart';
-import 'package:presentation/screen/task/widget/content_item_widget.dart';
-import 'package:presentation/screen/task/widget/header_item_widget.dart';
+import 'package:presentation/screen/task/widget/task_list_widget.dart';
 
 class TaskListScreen extends StatefulWidget {
   const TaskListScreen(this.status, {super.key});
@@ -36,55 +36,28 @@ class _TaskListScreenState extends State<TaskListScreen> with AutomaticKeepAlive
           return Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              StreamBuilder<List<TaskItem>>(
-                  stream: _viewModel.taskItemsStream,
-                  builder: (_, snapshot) {
-                    final tasks = snapshot.data ?? [];
-                    return NotificationListener<ScrollNotification>(
-                      onNotification: _onNotification,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.fromLTRB(24, 12, 24, 60),
-                        itemCount: tasks.length,
-                        itemBuilder: (_, index) {
-                          return _buildItem(tasks[index]);
-                        },
-                      ),
-                    );
-                  }),
-              if (isLoading)
-                Container(
-                  width: 36,
-                  height: 36,
-                  margin: const EdgeInsets.only(bottom: 24),
-                  alignment: Alignment.center,
-                  child: const CircularProgressIndicator(),
-                ),
+              _buildTaskList(),
+              if (isLoading) const Loading(margin: EdgeInsets.only(bottom: 24)),
             ],
           );
         });
   }
 
-  bool _onNotification(ScrollNotification notification) {
-    if (notification.metrics.pixels > notification.metrics.maxScrollExtent * 0.9) {
-      _viewModel.loadMore();
-    }
+  Widget _buildTaskList() {
+    return StreamBuilder<List<TaskItem>>(
+        stream: _viewModel.taskItemsStream,
+        builder: (_, snapshot) {
+          final tasks = snapshot.data ?? [];
+          if (!snapshot.hasError && tasks.isEmpty) {
+            return const Center(child: Loading());
+          }
 
-    return true;
-  }
-
-  Widget _buildItem(TaskItem item) {
-    if (item is HeaderTaskItem) {
-      return HeaderItemWidget(item);
-    } else if (item is ContentTaskItem) {
-      return ContentItemWidget(
-        item,
-        key: ValueKey(item.id),
-        onDelete: () => _viewModel.onDeleteTask(item.id),
-      );
-    } else {
-      return const SizedBox.shrink();
-    }
+          return TaskListWidget(
+            tasks,
+            onLoadMore: () => _viewModel.loadMore(),
+            onDeleteItem: _viewModel.onDeleteTask,
+          );
+        });
   }
 
   @override
