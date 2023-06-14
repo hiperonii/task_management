@@ -1,6 +1,7 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/common/widgets/loading.dart';
+import 'package:presentation/repository_provider.dart';
 import 'package:presentation/screen/task/model/task_item.dart';
 import 'package:presentation/screen/task/task_list_view_model.dart';
 import 'package:presentation/screen/task/widget/task_list_widget.dart';
@@ -15,7 +16,7 @@ class TaskListScreen extends StatefulWidget {
 }
 
 class _TaskListScreenState extends State<TaskListScreen> with AutomaticKeepAliveClientMixin {
-  late final TaskListViewModel _viewModel = TaskListViewModel(widget.status);
+  late final TaskListViewModel _viewModel = TaskListViewModel(widget.status, repositoryProvider.taskRepository);
 
   @override
   bool get wantKeepAlive => true;
