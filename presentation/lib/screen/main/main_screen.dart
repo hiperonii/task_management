@@ -1,6 +1,6 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:presentation/screen/task/model/task_tab.dart';
+import 'package:presentation/screen/main/model/task_tab.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -68,7 +68,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                 color: Colors.brown,
                 fontWeight: FontWeight.bold,
               )),
-          Text('This is just a sample UI',
+          Text('Welcome back',
               style: TextStyle(
                 fontSize: 14,
                 height: 1.5,
