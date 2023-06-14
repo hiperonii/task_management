@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:presentation/screen/passcode/widgets/key_symbols.dart';
 
@@ -10,6 +11,10 @@ void main() {
   binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
 
   group('TaskList test', () {
+    tearDown(() {
+      GetIt.instance.reset(dispose: false);
+    });
+
     testWidgets('''1. Task list should be able to scroll 
                    2. Task list able to switch tab''', (tester) async {
       app.main();
@@ -48,6 +53,10 @@ void main() {
   });
 
   group('Passcode test', () {
+    tearDown(() {
+      GetIt.instance.reset(dispose: false);
+    });
+
     testWidgets('''1. Passcode should be navigate to main screen only if code is correct 
                    2. Lock on inactive duration''', (tester) async {
       app.main();
@@ -62,7 +71,7 @@ void main() {
       await _tapVirtualKeyboard(tester, KeySymbols.seven);
       await _tapVirtualKeyboard(tester, KeySymbols.seven);
       await _tapVirtualKeyboard(tester, KeySymbols.seven);
-      await _waitForAction(tester);
+      await _waitForAction(tester, const Duration(milliseconds: 200));
       expect(_findByText('Incorrect passcode'), findsOneWidget);
 
       // Wait for 1 second, expect the error message to disappear
@@ -88,6 +97,8 @@ void main() {
 
       // Wait for 10 seconds, expect to see passcode screen
       await _waitForAction(tester, const Duration(seconds: 10));
+      await tester.pumpAndSettle();
+      await _waitForAction(tester);
       expect(_findByKey('Keyboard'), findsOneWidget);
     });
   });
