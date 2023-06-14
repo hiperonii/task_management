@@ -26,7 +26,7 @@ class PasscodeViewModel {
     if (_code == '123456') {
       NavigationService().navigateTo(Routes.main);
     } else {
-      passcodeSubject.addError(Exception('Passcode incorrect'));
+      passcodeSubject.addError(ArgumentError());
       Future.delayed(const Duration(seconds: 1)).then((value) => passcodeSubject.add(''));
     }
   }

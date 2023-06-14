@@ -25,7 +25,7 @@ class PinCode extends StatelessWidget {
 
   Color _getColor() {
     if (isError) {
-      return Colors.pinkAccent.shade100;
+      return Colors.pinkAccent.shade100.withOpacity(0.2);
     }
 
     return isActive ? Colors.purple : Colors.grey.withOpacity(0.1);

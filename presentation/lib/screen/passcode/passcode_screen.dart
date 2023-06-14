@@ -42,7 +42,14 @@ class _PasscodeScreenState extends State<PasscodeScreen> {
     return StreamBuilder<String>(
         stream: _viewModel.passcodeSubject,
         builder: (_, snapshot) {
-          return PinCodeField(snapshot.data ?? '', isError: snapshot.hasError);
+          final isError = snapshot.hasError;
+          return Column(
+            children: [
+              PinCodeField(snapshot.data ?? '', isError: isError),
+              const SizedBox(height: 12),
+              if (isError) Text('Incorrect passcode', style: TextStyle(color: Colors.pink.withOpacity(0.5))),
+            ],
+          );
         });
   }
 }
