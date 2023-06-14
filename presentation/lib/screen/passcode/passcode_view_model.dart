@@ -23,8 +23,11 @@ class PasscodeViewModel {
   }
 
   void onComplete() {
-    if(_code == '123456') {
+    if (_code == '123456') {
       NavigationService().navigateTo(Routes.main);
+    } else {
+      passcodeSubject.addError(Exception('Passcode incorrect'));
+      Future.delayed(const Duration(seconds: 1)).then((value) => passcodeSubject.add(''));
     }
   }
 }

@@ -6,12 +6,12 @@ class PinCodeField extends StatefulWidget {
     this.code, {
     Key? key,
     this.length = 6,
-    this.pinSize,
+    this.isError = false,
   }) : super(key: key);
 
-  final int length;
-  final Size? pinSize;
   final String code;
+  final int length;
+  final bool isError;
 
   @override
   State<PinCodeField> createState() => _PinCodeFieldState();
@@ -31,7 +31,7 @@ class _PinCodeFieldState extends State<PinCodeField> {
     final active = widget.code.isNotEmpty ? widget.code.length > index : false;
     return Container(
       padding: EdgeInsets.only(left: leftPadding),
-      child: PinCode(pinSize: widget.pinSize, isActive: active),
+      child: PinCode(pinSize: const Size.fromRadius(12), isActive: active, isError: widget.isError),
     );
   }
 }

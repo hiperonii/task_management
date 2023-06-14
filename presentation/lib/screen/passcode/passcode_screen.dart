@@ -25,13 +25,16 @@ class _PasscodeScreenState extends State<PasscodeScreen> {
   }
 
   Widget _buildBody() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _buildPinCodeField(),
-        const SizedBox(height: 60),
-        VirtualKeyboard(onTap: _viewModel.onKeyTap),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _buildPinCodeField(),
+          const SizedBox(height: 60),
+          VirtualKeyboard(onTap: _viewModel.onKeyTap),
+        ],
+      ),
     );
   }
 
@@ -39,7 +42,7 @@ class _PasscodeScreenState extends State<PasscodeScreen> {
     return StreamBuilder<String>(
         stream: _viewModel.passcodeSubject,
         builder: (_, snapshot) {
-          return PinCodeField(snapshot.data ?? '');
+          return PinCodeField(snapshot.data ?? '', isError: snapshot.hasError);
         });
   }
 }

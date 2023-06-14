@@ -48,7 +48,7 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Colors.grey.withOpacity(0.3),
+          color: Colors.grey.withOpacity(0.1),
         ),
         child: Text(key.value,
             style: const TextStyle(

@@ -4,21 +4,30 @@ class PinCode extends StatelessWidget {
   const PinCode({
     Key? key,
     this.isActive = false,
-    this.pinSize,
+    this.isError = false,
+    this.pinSize = const Size.fromRadius(12),
   }) : super(key: key);
 
-  final Size? pinSize;
+  final Size pinSize;
   final bool isActive;
+  final bool isError;
 
   @override
   Widget build(BuildContext context) {
-    final size = pinSize ?? const Size.fromRadius(12);
     return ClipOval(
       child: Container(
-        width: size.width,
-        height: size.height,
-        color: isActive ? Colors.grey : Colors.grey.withOpacity(0.2),
+        width: pinSize.width,
+        height: pinSize.height,
+        color: _getColor(),
       ),
     );
+  }
+
+  Color _getColor() {
+    if (isError) {
+      return Colors.pinkAccent.shade100;
+    }
+
+    return isActive ? Colors.purple : Colors.grey.withOpacity(0.1);
   }
 }
