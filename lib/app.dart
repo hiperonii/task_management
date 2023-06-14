@@ -18,10 +18,15 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: Listener(
-        onPointerDown: (_) => locator.get<PasscodeService>().reset(),
-        child: const PasscodeScreen(),
-      ),
+      builder: (_, Widget? child) {
+        return Listener(
+          onPointerDown: (_) {
+            locator.get<PasscodeService>().reset();
+          },
+          child: child,
+        );
+      },
+      home: const PasscodeScreen(),
     );
   }
 }
