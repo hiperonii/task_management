@@ -21,16 +21,18 @@ sh script/generate_code.sh
 ```
 
 ## Project structure
-This project has 3 layers, presentation, domain, and data.
+This project has 3 layers, presentation, domain, and data. Using *get_it* to do dependency injection. 
 
 ### Presentation
-Presentation layer is Flutter a app module, contains UI related and services. There are 2 services, NavigationService which using for navigating between screen, and PasscodeService for handling lock application with passcode when user inactive more than 10 seconds.
+Presentation layer is a Flutter app module, contains UI related and services. Using MVVM pattern combines with *rxdart* as a statemanagement.  
+There are 2 services, NavigationService which using for navigating between screen, and PasscodeService for handling lock application with passcode when user inactive more than 10 seconds.
 
 ### Domain
-Domain layer is a Dart module, contains object class and interface of Repository
+Domain layer is a Dart module, contains object class and interface of Repository. 
 
 ### Data
-Data layer is a Flutter package module, contains interaction with API. There are DTOs, Repository (implementation) and ApiService
+Data layer is a Flutter package module, contains interaction with API. There are DTOs, Mapper, implementation of Repository and ApiService.
+Using *dio* as HTTP client, with *retrofit* to generate boilerplate code.
 
 ### Project  
 root    
@@ -50,13 +52,15 @@ root
 |--script
 
 ## Run the unit test
-To run unit test, run the following command from the root of the project
+To run unit test, run the following command from the root of the project.  
+(Currently, I implemented test cases only presentation layers, to test logic of view model)
 ```dart
 sh script/test.sh
 ```
 
 ## Run the integration test
-To test on a real iOS / Android device, first connect the device and run the following command from the root of the project.
+To test on a real iOS / Android device, first connect the device and run the following command from the root of the project.  
+(There are 2 group of test cases, test TaskList and Passcode)
 
 ```dart
 flutter test integration_test/smoke_test.dart
