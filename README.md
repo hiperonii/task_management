@@ -24,7 +24,7 @@ sh script/generate_code.sh
 This project has 3 layers, presentation, domain, and data.
 
 ### Presentation
-Presentation layer is Flutter a app module, contains UI related and services. There are 2 services in Presentation, NavigationService which using for navigating between screen, and PasscodeService for handling lock application with passcode when user inactive more than 10 seconds.
+Presentation layer is Flutter a app module, contains UI related and services. There are 2 services, NavigationService which using for navigating between screen, and PasscodeService for handling lock application with passcode when user inactive more than 10 seconds.
 
 ### Domain
 Domain layer is a Dart module, contains object class and interface of Repository
