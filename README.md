@@ -53,7 +53,7 @@ root
 
 ## Run the unit test
 To run unit test, run the following command from the root of the project.  
-(Currently, I implemented test cases only presentation layers, to test logic of view model)
+(Currently, I implemented test cases only in presentation layers, to test logic of view model)
 ```dart
 sh script/test.sh
 ```
